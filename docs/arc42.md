@@ -68,6 +68,9 @@ Die MySQL-Datenbank enthält mehrere Tabellen zum Speichern von Benutzern, Ereig
 - **categories**: enthält Veranstaltungskategorien (id, name)
 - **reservations**: enthält Anmeldungen zu Veranstaltungen (id, user_id, event_id)
 
+![Alt text](./db-schema.png?raw=true "Title")
+
+
 ## Laufzeitsicht
 
 In der Laufzeitsicht wird beschrieben, wie die verschiedenen Komponenten der Anwendung zur Laufzeit interagieren. Ein typischer Ablauf könnte folgendermaßen aussehen:
@@ -103,6 +106,15 @@ Das beigefügte Docker Compose Setup dient der Containerisierung der Anwendung u
 - **Tests**: Umfangreiche Testabdeckung (Unit, Integration, E2E, Sec)
 
 ## Tests
+
+- Alle Testabdeckungsberichte werden hier generiert [tests/reports/coverage](./../tests/reports/coverage)
+- [Überprüfen Sie die Code-Coverage-Berichte](./../tests/reports/coverage/index.html)
+- Die Testabdeckung kann durch Ausführen der folgenden Befehle im App-Docker-Container generiert werden
+````
+php artisan test --coverage-html tests/reports/coverage
+````
+
+
 
 ### Unit Tests
 
