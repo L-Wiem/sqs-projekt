@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
@@ -20,15 +21,20 @@ class EventControllerTest extends TestCase
 
     public function test_createEvent()
     {
-        $response = $this->post('/events', [
+        $user = User::factory()->create();
+        $this->post('/login', ['email' => $user->email, 'password' => 'password',]);
+        $this->assertAuthenticated();
+
+        $this->post('/events/store', [
             'title' => 'Test Event from EventControllerTest -test_createEvent title',
             'description' => 'Test Event from EventControllerTest - test_createEvent description',
+            'capacity' =>  10
         ]);
 
-        $response->assertRedirect('/');
         $this->assertDatabaseHas('events', [
             'title' => 'Test Event from EventControllerTest -test_createEvent title',
             'description' => 'Test Event from EventControllerTest - test_createEvent description',
+            'capacity' =>  10
         ]);
     }
 
