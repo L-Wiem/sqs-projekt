@@ -1,8 +1,8 @@
-# Event-Management-Anwendung Architektur
+# Event-Manager Anwendungsarchitektur
 
 ## Einführung
 
-Dieses Dokument beschreibt die Architektur der Event-Management-Anwendung. Die Anwendung wird mit Laravel, einem PHP-Webframework, entwickelt und verwendet MySQL als Datenbank. Dieses Dokument deckt verschiedene Aspekte der Anwendung ab, einschließlich ihrer Architektur, Komponenten und Teststrategien.
+Dieses Dokument beschreibt die Architektur der Event-Manager Anwendung. Die Anwendung wird mit Laravel, einem PHP-Webframework, entwickelt und verwendet MySQL als Datenbank. Dieses Dokument deckt verschiedene Aspekte der Anwendung ab, einschließlich ihrer Architektur, Komponenten und Teststrategien.
 
 ## Inhaltsverzeichnis
 
@@ -25,7 +25,7 @@ Dieses Dokument beschreibt die Architektur der Event-Management-Anwendung. Die A
 
 ## Anforderungen
 
-Die Event-Management-Anwendung muss folgende Anforderungen erfüllen:
+Die Event-Manager Anwendung muss folgende Anforderungen erfüllen:
 
 - Benutzerregistrierung und -authentifizierung
 - Verwaltung von Veranstaltungen (Erstellen, Bearbeiten, Löschen)
@@ -113,7 +113,6 @@ Das beigefügte Docker Compose Setup dient der Containerisierung der Anwendung u
 ````
 php artisan test --coverage-html tests/reports/coverage
 ````
-
 
 
 ### Unit Tests
