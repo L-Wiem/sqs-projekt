@@ -13,13 +13,13 @@ Laravel ist ein Webanwendungs-Framework mit ausdrucksstarker, eleganter Syntax. 
 - Die Anwendung läuft vollständig im Docker
 
 1. Klonen Sie das Repository
-````
+````bash
 git clone https://github.com/L-Wiem/prsqs1.git
 ````
 
 2. Starten Sie es mit dem docker compose command
 
-````
+````bash
 docker compose up --build   
 ````
 
