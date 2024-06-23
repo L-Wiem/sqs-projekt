@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Services\EventService;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
+use App\Models\User;
 
 class EventServiceTest extends TestCase
 {
@@ -14,8 +15,9 @@ class EventServiceTest extends TestCase
     //test to assure that an event is correctly fetched from the database
     public function test_fetchEvent()
     {
+        $this->createUserAndLogin();
         //create a new event
-        $data = ['title' => 'Test Event title', 'description' => 'Test Event description'];
+        $data = ['title' => 'Test Event title', 'description' => 'Test Event description', 'capacity' => 10];
         $eventService = new EventService();
         $event = $eventService->createEvent($data);
 
@@ -27,6 +29,7 @@ class EventServiceTest extends TestCase
         $this->assertEquals($data['title'], $testEvent->title);
         $this->assertEquals($data['description'], $testEvent->description);
     }
+
     public function test_fetchEvent_with_nonExistent_id()
     {
         // attempt to fetch an event with a non-existent ID
@@ -36,10 +39,12 @@ class EventServiceTest extends TestCase
         // check that the fetched event is null
         $this->assertNull($testEvent);
     }
+
     public function test_fetchEvents()
     {
-        $dataOne = ['title' => 'Test 1', 'description' => 'Lorem ipsum'];
-        $dataTwo = ['title' => 'Test 2', 'description' => 'Lorem ipsum2'];
+        $this->createUserAndLogin();
+        $dataOne = ['title' => 'Test 1', 'description' => 'Lorem ipsum', 'capacity' => 10];
+        $dataTwo = ['title' => 'Test 2', 'description' => 'Lorem ipsum2', 'capacity' => 10];
         $eventService = new EventService();
         $eventOne = $eventService->createEvent($dataOne);
         sleep(1);
@@ -54,7 +59,8 @@ class EventServiceTest extends TestCase
     //test to assure that the data was persisted successfully
     public function test_persistEvent()
     {
-        $data = ['title' => 'Test Event title', 'description' => 'Test Event description'];
+        $this->createUserAndLogin();
+        $data = ['title' => 'Test Event title', 'description' => 'Test Event description', 'capacity' => 10];
         $eventService = new EventService();
         $event = $eventService->persistEvent($data);
         $this->assertNotNull($event);
@@ -71,7 +77,7 @@ class EventServiceTest extends TestCase
     //test to assure that the data was deleted successfully
     public function test_deleteEvent_with_valid_data()
     {
-        $data = ['title' => 'Test Event title', 'description' => 'Test Event description'];
+        $data = ['title' => 'Test Event title', 'description' => 'Test Event description', 'capacity' => 10];
         $eventService = new EventService();
         $event = $eventService->persistEvent($data);
         $this->assertNotNull($event);
@@ -90,6 +96,13 @@ class EventServiceTest extends TestCase
         $eventService->deleteEvent(3456789098765678);
     }
 
+    private function createUserAndLogin()
+    {
+        $user = User::factory()->create([
+            'email' => bin2hex(random_bytes(8)) . '@test.com']);
+        $this->actingAs($user);
+        return $user;
+    }
 }
 
 
